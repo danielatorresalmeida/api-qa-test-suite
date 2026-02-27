@@ -3,10 +3,12 @@ from pathlib import Path
 import pytest
 from utils.api_client import APIClient
 
+ROOT = Path(__file__).resolve().parents[1]
+
 @pytest.fixture(scope="session")
 def settings():
     """Load config once per session."""
-    return json.loads(Path("config/settings.json").read_text())
+    return json.loads((ROOT / "config" / "settings.json").read_text(encoding="utf-8-sig"))
 
 @pytest.fixture(scope="session")
 def api(settings):
