@@ -1,0 +1,133 @@
+body {
+  background:
+    radial-gradient(circle at top right, rgba(11, 95, 255, 0.12), transparent 32%),
+    linear-gradient(180deg, #f4f7fb 0%, #e8eef7 100%);
+  color: #18212f;
+  font-family: "Segoe UI", "Trebuchet MS", sans-serif;
+  font-size: 14px;
+  margin: 0;
+  min-width: 0;
+  padding: 24px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #0f1726;
+  font-family: "Georgia", "Times New Roman", serif;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+h1 {
+  font-size: 34px;
+  margin: 0 0 10px;
+}
+
+h2 {
+  font-size: 18px;
+  margin-top: 24px;
+}
+
+p,
+span,
+td,
+th,
+li {
+  color: #243247;
+}
+
+a {
+  color: #0b5fff;
+}
+
+#environment,
+#results-table,
+.log,
+.additional-summary,
+.summary {
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(151, 169, 196, 0.55);
+  border-radius: 16px;
+  box-shadow: 0 20px 45px rgba(29, 45, 71, 0.08);
+}
+
+#environment,
+.summary,
+.additional-summary {
+  margin-bottom: 20px;
+  padding: 16px 18px;
+}
+
+#results-table {
+  border-collapse: separate;
+  border-spacing: 0;
+  overflow: hidden;
+  width: 100%;
+}
+
+#results-table th {
+  background: linear-gradient(135deg, #16314e 0%, #28527c 100%);
+  border: 0;
+  color: #f8fbff;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  padding: 12px 14px;
+  text-transform: uppercase;
+}
+
+#results-table td {
+  background: rgba(255, 255, 255, 0.9);
+  border-bottom: 1px solid rgba(151, 169, 196, 0.4);
+  padding: 12px 14px;
+}
+
+#results-table tr:last-child td {
+  border-bottom: 0;
+}
+
+.results-table-row .col-result {
+  font-weight: 700;
+}
+
+.passed .col-result {
+  color: #0b7a4b;
+}
+
+.failed .col-result {
+  color: #b42318;
+}
+
+.skipped .col-result {
+  color: #7a5a00;
+}
+
+.log {
+  margin-top: 14px;
+  padding: 16px;
+}
+
+.log pre,
+pre {
+  background: #0f1726;
+  border-radius: 12px;
+  color: #e7edf7;
+  overflow-x: auto;
+  padding: 14px;
+}
+
+.filter,
+.summary__data,
+.toggleButton,
+button {
+  border-radius: 999px;
+}
+
+table#environment td:first-child,
+table#environment th:first-child {
+  font-weight: 700;
+}

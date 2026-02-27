@@ -30,7 +30,7 @@ jobs:
       - name: Run tests and generate report
         run: |
           mkdir -p docs/assets/reports/api-qa
-          pytest --html=docs/assets/reports/api-qa/index.html --self-contained-html || true
+          pytest --html=docs/assets/reports/api-qa/index.html --self-contained-html --css=config/pytest-html.css || true
 
       - name: Commit report
         if: always()
@@ -38,6 +38,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add docs/assets/reports/api-qa/index.html
+          git add config/pytest-html.css
           git add docs/index.html docs/.nojekyll
           git diff --staged --quiet && exit 0
           git commit -m "Update API QA report"
