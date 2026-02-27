@@ -1,4 +1,5 @@
 {
   "base_url": "https://reqres.in/api",
-  "auth_token": ""
+  "auth_token": "",
+  "extra_headers": {}
 }
