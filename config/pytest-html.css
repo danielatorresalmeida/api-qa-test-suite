@@ -44,6 +44,90 @@ a {
   color: #0b5fff;
 }
 
+code {
+  background: rgba(22, 49, 78, 0.08);
+  border-radius: 8px;
+  color: #16314e;
+  padding: 2px 6px;
+}
+
+#title {
+  display: inline-block;
+  margin-bottom: 8px;
+}
+
+body > p:first-of-type {
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid rgba(151, 169, 196, 0.4);
+  border-radius: 999px;
+  box-shadow: 0 12px 24px rgba(29, 45, 71, 0.06);
+  display: inline-flex;
+  margin: 0 0 20px;
+  padding: 8px 14px;
+}
+
+.qa-hero {
+  background:
+    linear-gradient(135deg, rgba(11, 95, 255, 0.1), rgba(22, 49, 78, 0.02)),
+    rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(151, 169, 196, 0.5);
+  border-radius: 18px;
+  box-shadow: 0 20px 45px rgba(29, 45, 71, 0.08);
+  margin-bottom: 16px;
+  padding: 18px;
+}
+
+.qa-hero__eyebrow {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  margin: 0 0 14px;
+  text-transform: uppercase;
+}
+
+.qa-hero__grid {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+}
+
+.qa-metric {
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(151, 169, 196, 0.45);
+  border-radius: 14px;
+  padding: 14px;
+}
+
+.qa-metric strong {
+  color: #0f1726;
+  display: block;
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+.qa-metric__label {
+  color: #4a5b72;
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+}
+
+.qa-summary-note {
+  background: rgba(11, 95, 255, 0.08);
+  border-left: 4px solid #0b5fff;
+  border-radius: 12px;
+  margin: 0;
+  padding: 12px 14px;
+}
+
+.qa-summary-note--warning {
+  background: rgba(245, 158, 11, 0.12);
+  border-left-color: #c77900;
+}
+
 #environment,
 #results-table,
 .log,
@@ -60,6 +144,36 @@ a {
 .additional-summary {
   margin-bottom: 20px;
   padding: 16px 18px;
+}
+
+#environment-header {
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+}
+
+#environment {
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-bottom: 20px;
+  overflow: hidden;
+  width: 100%;
+}
+
+#environment td {
+  background: rgba(255, 255, 255, 0.9);
+  border-bottom: 1px solid rgba(151, 169, 196, 0.35);
+  padding: 10px 14px;
+}
+
+#environment tr:last-child td {
+  border-bottom: 0;
+}
+
+#environment ul {
+  margin: 0;
+  padding-left: 18px;
 }
 
 #results-table {
@@ -84,6 +198,7 @@ a {
   background: rgba(255, 255, 255, 0.9);
   border-bottom: 1px solid rgba(151, 169, 196, 0.4);
   padding: 12px 14px;
+  vertical-align: top;
 }
 
 #results-table tr:last-child td {
@@ -106,6 +221,24 @@ a {
   color: #7a5a00;
 }
 
+.col-testId {
+  min-width: 260px;
+}
+
+.qa-test-name {
+  color: #0f1726;
+  display: block;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.qa-test-path {
+  color: #5b6b80;
+  display: block;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
 .log {
   margin-top: 14px;
   padding: 16px;
@@ -125,6 +258,45 @@ pre {
 .toggleButton,
 button {
   border-radius: 999px;
+}
+
+.run-count {
+  background: rgba(22, 49, 78, 0.06);
+  border-radius: 14px;
+  display: inline-block;
+  font-size: 15px;
+  font-weight: 700;
+  margin: 8px 0 12px;
+  padding: 10px 14px;
+}
+
+.controls {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  justify-content: space-between;
+}
+
+.filters {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.filters span {
+  background: rgba(22, 49, 78, 0.06);
+  border-radius: 999px;
+  padding: 4px 10px;
+}
+
+button {
+  background: #16314e;
+  border: 0;
+  color: #f8fbff;
+  cursor: pointer;
+  padding: 8px 12px;
 }
 
 table#environment td:first-child,
