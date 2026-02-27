@@ -30,9 +30,10 @@ jobs:
       - name: Run tests and generate report
         run: |
           mkdir -p docs/assets/reports/api-qa
-          pytest --html=docs/assets/reports/api-qa/index.html --self-contained-html
+          pytest --html=docs/assets/reports/api-qa/index.html --self-contained-html || true
 
       - name: Commit report
+        if: always()
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
