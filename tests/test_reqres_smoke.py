@@ -7,7 +7,7 @@ def test_users_list_ok():
     client = APIClient()
     if not client.headers.get("x-api-key"):
         pytest.skip(
-            "ReqRes requires x-api-key. Set config.extra_headers.x-api-key to run this test."
+            "ReqRes requires x-api-key. Set config.extra_headers.x-api-key or REQRES_API_KEY to run this test."
         )
 
     resp = client.get("/users")

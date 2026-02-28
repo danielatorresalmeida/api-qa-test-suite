@@ -1,5 +1,10 @@
 {
   "base_url": "https://reqres.in/api",
   "auth_token": "",
-  "extra_headers": {}
+  "extra_headers": {},
+  "dashboard": {
+    "title": "API QA Test Suite",
+    "subtitle": "Automated quality report",
+    "brand_text": "QA"
+  }
 }

@@ -66,6 +66,59 @@ body > p:first-of-type {
   padding: 8px 14px;
 }
 
+.qa-brand {
+  align-items: center;
+  background:
+    linear-gradient(135deg, rgba(22, 49, 78, 0.96), rgba(11, 95, 255, 0.85)),
+    rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(151, 169, 196, 0.45);
+  border-radius: 20px;
+  box-shadow: 0 22px 48px rgba(29, 45, 71, 0.16);
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
+  padding: 18px;
+}
+
+.qa-brand__mark {
+  align-items: center;
+  background: rgba(255, 255, 255, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 18px;
+  color: #f8fbff;
+  display: inline-flex;
+  font-family: "Georgia", "Times New Roman", serif;
+  font-size: 24px;
+  font-weight: 700;
+  height: 64px;
+  justify-content: center;
+  letter-spacing: 0.06em;
+  min-width: 64px;
+}
+
+.qa-brand__content {
+  min-width: 0;
+}
+
+.qa-brand__title,
+.qa-brand__subtitle {
+  color: #f8fbff;
+  margin: 0;
+}
+
+.qa-brand__title {
+  font-family: "Georgia", "Times New Roman", serif;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.qa-brand__subtitle {
+  color: rgba(248, 251, 255, 0.88);
+  font-size: 13px;
+  margin-top: 6px;
+}
+
 .qa-hero {
   background:
     linear-gradient(135deg, rgba(11, 95, 255, 0.1), rgba(22, 49, 78, 0.02)),
@@ -297,6 +350,17 @@ button {
   color: #f8fbff;
   cursor: pointer;
   padding: 8px 12px;
+}
+
+@media (max-width: 720px) {
+  body {
+    padding: 14px;
+  }
+
+  .qa-brand {
+    align-items: flex-start;
+    flex-direction: column;
+  }
 }
 
 table#environment td:first-child,

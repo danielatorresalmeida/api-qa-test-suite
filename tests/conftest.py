@@ -1,15 +1,31 @@
-import json
 from html import escape
-from pathlib import Path
 import pytest
-from utils.api_client import APIClient
-
-ROOT = Path(__file__).resolve().parents[1]
-SETTINGS_PATH = ROOT / "config" / "settings.json"
+from utils.api_client import APIClient, config as api_config
 
 
 def _load_settings():
-    return json.loads(SETTINGS_PATH.read_text(encoding="utf-8-sig"))
+    return dict(api_config)
+
+
+def _dashboard_settings():
+    dashboard = api_config.get("dashboard") or {}
+    if not isinstance(dashboard, dict):
+        dashboard = {}
+    title = str(dashboard.get("title") or "API QA Test Suite")
+    subtitle = str(dashboard.get("subtitle") or "Automated quality report")
+    brand_text = str(dashboard.get("brand_text") or "QA")[:4]
+    return {
+        "title": title,
+        "subtitle": subtitle,
+        "brand_text": brand_text,
+    }
+
+
+def _report_title():
+    title = _dashboard_settings()["title"]
+    if "dashboard" in title.lower():
+        return title
+    return f"{title} Dashboard"
 
 
 def _format_nodeid(report):
@@ -33,21 +49,32 @@ def api(settings):
 
 
 def pytest_html_report_title(report):
-    report.title = "API QA Dashboard"
+    report.title = _report_title()
 
 
 def pytest_html_results_summary(prefix, summary, postfix, session):
-    settings = _load_settings()
+    settings = dict(api_config)
+    dashboard = _dashboard_settings()
     extra_headers = settings.get("extra_headers") or {}
     api_key = extra_headers.get("x-api-key")
     mode = "Live endpoint checks" if api_key else "Preview mode (no API key)"
     target = escape(settings.get("base_url", "Not configured"))
     scenario_count = len(session.items)
     scenario_label = "scenario" if scenario_count == 1 else "scenarios"
+    title = escape(dashboard["title"])
+    subtitle = escape(dashboard["subtitle"])
+    brand_text = escape(dashboard["brand_text"])
 
     prefix.extend(
         [
             (
+                '<section class="qa-brand">'
+                f'<div class="qa-brand__mark">{brand_text}</div>'
+                '<div class="qa-brand__content">'
+                f'<p class="qa-brand__title">{title}</p>'
+                f'<p class="qa-brand__subtitle">{subtitle}</p>'
+                "</div>"
+                "</section>"
                 '<section class="qa-hero">'
                 '<p class="qa-hero__eyebrow">Release Readiness Snapshot</p>'
                 '<div class="qa-hero__grid">'
@@ -70,7 +97,8 @@ def pytest_html_results_summary(prefix, summary, postfix, session):
         postfix.append(
             (
                 '<p class="qa-summary-note qa-summary-note--warning">'
-                "Add <code>extra_headers.x-api-key</code> in config/settings.json to run the live ReqRes smoke check."
+                "Add <code>extra_headers.x-api-key</code> in config/settings.json or a "
+                "<code>REQRES_API_KEY</code> GitHub Actions secret to run the live ReqRes smoke check."
                 "</p>"
             )
         )

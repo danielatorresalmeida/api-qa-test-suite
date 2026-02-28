@@ -32,6 +32,13 @@ def _load_config() -> dict:
     token = os.getenv("API_AUTH_TOKEN")
     if token is not None and token != "":
         data["auth_token"] = token
+    extra_headers = data.get("extra_headers")
+    if not isinstance(extra_headers, dict):
+        extra_headers = {}
+    reqres_api_key = os.getenv("REQRES_API_KEY")
+    if reqres_api_key:
+        extra_headers["x-api-key"] = reqres_api_key
+    data["extra_headers"] = extra_headers
 
     return data
 
