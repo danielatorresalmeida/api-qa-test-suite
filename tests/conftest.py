@@ -76,7 +76,7 @@ def pytest_html_results_summary(prefix, summary, postfix, session):
                 "</div>"
                 "</section>"
                 '<section class="qa-hero">'
-                '<p class="qa-hero__eyebrow">Release Readiness Snapshot</p>'
+                '<p class="qa-hero__eyebrow">Single-endpoint smoke test</p>'
                 '<div class="qa-hero__grid">'
                 f'<div class="qa-metric"><span class="qa-metric__label">Target</span><strong>{target}</strong></div>'
                 f'<div class="qa-metric"><span class="qa-metric__label">Suite</span><strong>{scenario_count} {scenario_label}</strong></div>'
@@ -97,8 +97,8 @@ def pytest_html_results_summary(prefix, summary, postfix, session):
         postfix.append(
             (
                 '<p class="qa-summary-note qa-summary-note--warning">'
-                "Add <code>extra_headers.x-api-key</code> in config/settings.json or a "
-                "<code>REQRES_API_KEY</code> GitHub Actions secret to run the live ReqRes smoke check."
+                "Set <code>REQRES_API_KEY</code> as a local environment variable or GitHub Actions secret. "
+                "No live endpoint was validated without this key; CI treats missing configuration as a failure."
                 "</p>"
             )
         )
