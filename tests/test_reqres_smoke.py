@@ -1,3 +1,4 @@
+import os
 import pytest
 from utils.api_client import APIClient
 
@@ -6,8 +7,10 @@ def test_users_list_ok():
     """Basic smoke test against ReqRes /users endpoint."""
     client = APIClient()
     if not client.headers.get("x-api-key"):
+        if os.getenv("CI", "").lower() == "true":
+            pytest.fail("REQRES_API_KEY is missing: CI must execute the live smoke test.")
         pytest.skip(
-            "ReqRes requires x-api-key. Set config.extra_headers.x-api-key or REQRES_API_KEY to run this test."
+            "ReqRes requires x-api-key. Set REQRES_API_KEY locally to run this test."
         )
 
     resp = client.get("/users")
