@@ -1,6 +1,7 @@
 name: Update API QA Report
 
 on:
+  pull_request:
   push:
     branches: [main]
   workflow_dispatch:
@@ -30,12 +31,21 @@ jobs:
           pip install -r requirements.txt
 
       - name: Run tests and generate report
+        id: smoke
         run: |
           mkdir -p docs/assets/reports/api-qa
-          pytest --html=docs/assets/reports/api-qa/index.html --self-contained-html --css=config/pytest-html.css || true
+          rm -f docs/assets/reports/api-qa/index.html
+          python -m pytest --html=docs/assets/reports/api-qa/index.html --self-contained-html --css=config/pytest-html.css
+
+      - name: Upload report even when tests fail
+        if: ${{ !cancelled() && steps.smoke.outcome != 'skipped' && hashFiles('docs/assets/reports/api-qa/index.html') != '' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: api-qa-report-${{ github.run_id }}
+          path: docs/assets/reports/api-qa/index.html
 
       - name: Commit report
-        if: always()
+        if: ${{ !cancelled() && steps.smoke.outcome != 'skipped' && github.event_name != 'pull_request' && github.ref == 'refs/heads/main' && hashFiles('docs/assets/reports/api-qa/index.html') != '' }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"

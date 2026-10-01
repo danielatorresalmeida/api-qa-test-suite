@@ -37,10 +37,12 @@ def _format_nodeid(report):
         scenario = f"{scenario} ({report.when})"
     return source, scenario
 
+
 @pytest.fixture(scope="session")
 def settings():
     """Load config once per session."""
     return _load_settings()
+
 
 @pytest.fixture(scope="session")
 def api(settings):
@@ -97,9 +99,9 @@ def pytest_html_results_summary(prefix, summary, postfix, session):
         postfix.append(
             (
                 '<p class="qa-summary-note qa-summary-note--warning">'
-                "Add <code>extra_headers.x-api-key</code> in config/settings.json or a "
-                "<code>REQRES_API_KEY</code> GitHub Actions secret to run the live ReqRes smoke check."
-                "</p>"
+"Set <code>REQRES_API_KEY</code> as a local environment variable or GitHub Actions secret. "
+"No live endpoint was validated without this key; CI treats missing configuration as a failure."
+"</p>"
             )
         )
 
