@@ -76,7 +76,7 @@ def pytest_html_results_summary(prefix, summary, postfix, session):
                 "</div>"
                 "</section>"
                 '<section class="qa-hero">'
-                '<p class="qa-hero__eyebrow">Release Readiness Snapshot</p>'
+                '<p class="qa-hero__eyebrow">Automated API Test Suite</p>'
                 '<div class="qa-hero__grid">'
                 f'<div class="qa-metric"><span class="qa-metric__label">Target</span><strong>{target}</strong></div>'
                 f'<div class="qa-metric"><span class="qa-metric__label">Suite</span><strong>{scenario_count} {scenario_label}</strong></div>'
