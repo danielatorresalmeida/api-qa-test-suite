@@ -1,31 +1,176 @@
-# API QA smoke test
+# API QA Test Suite
 
-A small Python / Requests / pytest project with a pytest-html report and GitHub Actions workflow.
+Automated API testing project built with **Python, Requests and pytest**, with HTML reporting and GitHub Actions CI.
 
-## Actual coverage
+The project exercises the ReqRes API and demonstrates reusable API clients, positive and negative test scenarios, parametrized tests and automated reporting.
 
-One smoke test requests `GET /users` from the configured ReqRes API and checks:
+## ✨ Highlights
 
-- HTTP status is 200;
-- the JSON response is an object;
-- the response contains a `data` key.
+- 🐍 Python + pytest test automation
+- 🌐 HTTP requests with Requests
+- ✅ Positive and negative API scenarios
+- 🔁 Parametrized tests
+- 🧩 Reusable API client
+- 🔐 API key configuration through environment variables
+- 📊 HTML test reports with pytest-html
+- ⚙️ GitHub Actions CI
+- 🌍 Published report through GitHub Pages
 
-This is not schema validation, business-rule coverage, a regression suite or a release-readiness assessment. The reusable client exposes other HTTP methods, but those methods do not imply additional test coverage.
+## 🧪 Current Test Coverage
 
-## Run
+The current suite collects **5 test scenarios**.
 
-Install Python and run `python -m pip install -r requirements.txt` in this directory. Set `REQRES_API_KEY` in your local environment (never commit a real key to `config/settings.json`), then run:
+### User list
 
-```sh
+`GET /users?page=2`
+
+Checks:
+
+- HTTP `200`
+- response is valid JSON
+- expected page is returned
+- `data` is a non-empty list
+- each user contains the expected fields
+- essential field types are validated
+- email values contain `@`
+
+### Existing users
+
+`GET /users/{id}`
+
+The test is parametrized for:
+
+- user `1`
+- user `2`
+- user `3`
+
+Checks:
+
+- HTTP `200`
+- `data` exists
+- returned user structure is valid
+- returned ID matches the requested ID
+
+### Unknown user
+
+`GET /users/23`
+
+Checks:
+
+- HTTP `404`
+
+## 🛠️ Tech Stack
+
+- Python
+- pytest
+- Requests
+- pytest-html
+- GitHub Actions
+- GitHub Pages
+
+## 📂 Project Structure
+
+```text
+api-qa-test-suite/
+├── .github/
+│   └── workflows/
+├── config/
+├── docs/
+├── tests/
+│   ├── conftest.py
+│   └── test_reqres_smoke.py
+├── utils/
+│   └── api_client.py
+├── pytest.ini
+├── requirements.txt
+└── README.md
+```
+
+## ▶️ Running Locally
+
+Install the dependencies:
+
+```bash
+python -m pip install -r requirements.txt
+```
+
+Set the ReqRes API key as an environment variable.
+
+### PowerShell
+
+```powershell
+$env:REQRES_API_KEY="your-api-key"
+```
+
+Run the tests:
+
+```bash
+python -m pytest -q
+```
+
+Generate the HTML report:
+
+```bash
 python -m pytest --html=docs/assets/reports/api-qa/index.html --self-contained-html --css=config/pytest-html.css
 ```
 
-Without a key, a local run skips the smoke test: **skipped is not passed**. In GitHub Actions, missing configuration fails the test instead of producing a misleading green run. Configure the `REQRES_API_KEY` repository Actions secret to execute against ReqRes. An invalid key or unexpected response also fails the test.
+## 🔐 API Configuration
 
-## CI and report
+The default API target is:
 
-Test failures keep the workflow failed. The report is uploaded as an artifact when generated, including on failed test runs; on `main`, the workflow also commits the generated report for Pages. Pull requests never commit reports back to the repository. Do not infer success from the existence of an HTML report: read its date, target, mode and results.
+```text
+https://reqres.in/api
+```
 
-[Published report](https://danielatorresalmeida.github.io/api-qa-test-suite/assets/reports/api-qa/) — the audited report from 28 February 2026 contained **0 passed / 1 skipped** and did not validate the live endpoint. The current result depends on the latest workflow and configured key.
+The API key must not be committed to the repository.
 
-There is no separate build or lint command configured.
+It is read from:
+
+```text
+REQRES_API_KEY
+```
+
+When running locally without an API key, live API tests are skipped.
+
+In GitHub Actions, missing API configuration causes the workflow to fail rather than producing a misleading successful result.
+
+## ⚙️ Continuous Integration
+
+GitHub Actions runs the suite on:
+
+- pull requests
+- pushes to `main`
+- manual workflow dispatch
+
+The workflow:
+
+1. installs Python and project dependencies;
+2. runs the API tests;
+3. generates an HTML report;
+4. uploads the report as a workflow artifact;
+5. updates the published report on `main`.
+
+## 📊 Test Report
+
+[View the published API QA report](https://danielatorresalmeida.github.io/api-qa-test-suite/assets/reports/api-qa/)
+
+The result shown there reflects the latest published workflow execution.
+
+## 🎯 Purpose
+
+This repository is a portfolio project focused on API quality assurance and test automation.
+
+It demonstrates:
+
+- API test design
+- positive and negative testing
+- parametrization
+- reusable test infrastructure
+- HTTP and JSON validation
+- environment-based configuration
+- automated reporting
+- CI integration
+
+---
+
+Built and maintained by **Daniela Torres Almeida**.

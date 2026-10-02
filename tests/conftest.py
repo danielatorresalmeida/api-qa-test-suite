@@ -37,10 +37,12 @@ def _format_nodeid(report):
         scenario = f"{scenario} ({report.when})"
     return source, scenario
 
+
 @pytest.fixture(scope="session")
 def settings():
     """Load config once per session."""
     return _load_settings()
+
 
 @pytest.fixture(scope="session")
 def api(settings):
@@ -76,7 +78,7 @@ def pytest_html_results_summary(prefix, summary, postfix, session):
                 "</div>"
                 "</section>"
                 '<section class="qa-hero">'
-                '<p class="qa-hero__eyebrow">Single-endpoint smoke test</p>'
+                '<p class="qa-hero__eyebrow">Automated API Test Suite</p>'
                 '<div class="qa-hero__grid">'
                 f'<div class="qa-metric"><span class="qa-metric__label">Target</span><strong>{target}</strong></div>'
                 f'<div class="qa-metric"><span class="qa-metric__label">Suite</span><strong>{scenario_count} {scenario_label}</strong></div>'
@@ -97,9 +99,9 @@ def pytest_html_results_summary(prefix, summary, postfix, session):
         postfix.append(
             (
                 '<p class="qa-summary-note qa-summary-note--warning">'
-                "Set <code>REQRES_API_KEY</code> as a local environment variable or GitHub Actions secret. "
-                "No live endpoint was validated without this key; CI treats missing configuration as a failure."
-                "</p>"
+"Set <code>REQRES_API_KEY</code> as a local environment variable or GitHub Actions secret. "
+"No live endpoint was validated without this key; CI treats missing configuration as a failure."
+"</p>"
             )
         )
 
